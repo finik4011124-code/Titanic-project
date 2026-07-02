@@ -1,0 +1,17 @@
+experiment,accuracy,precision_1,recall_1,f1_1,notes
+baseline_logreg_4features,0.715,0.7,0.54,0.61,Pclass+SibSp+Parch+Fare
+log_reg_with_full_preprocessing,0.82,0.8,0.76,0.78,Added Sex Age HasCabin Embarked-OHE; scaled Age-Fare (fit on train only)
+stratified_kfold_logreg,0.7923670830456343,0.738861071624566,0.7102728047740836,0.723405996425529,"StratifiedKFold n=5, mean metrics across folds"
+model_1_logreg_best_penalty,0.7979850605737242,0.7484744168065897,0.7132139812446718,0.7298617590204222,"GridSearchCV best params: {'logreg__C': 0.1, 'logreg__penalty': 'l2'}"
+model_2_knn,0.8260184545853996,0.793567871005268,0.739769820971867,0.7653694499514933,"GridSearchCV best params: {'knn__metric': 'euclidean', 'knn__n_neighbors': 7, 'knn__weights': 'uniform'}"
+model_3_decision_tree,0.8226539451384094,0.7913791891131735,0.7309036658141517,0.7588879467078096,"GridSearchCV best params: {'tree__max_depth': 10, 'tree__min_samples_leaf': 5, 'tree__min_samples_split': 2}"
+model_4_random_forest,0.8383654510074697,0.822017227007502,0.7397271952259163,0.7777568327056944,"GridSearchCV best params: {'rf__max_depth': 10, 'rf__max_features': None, 'rf__n_estimators': 300}"
+model_5_catboost,0.8394890465130876,0.8329480967553401,0.7280477408354646,0.7767332148385298,"Optuna best params: {'depth': 3, 'learning_rate': 0.07175554363545131, 'iterations': 390, 'l2_leaf_reg': 4.940075126515389}"
+model_6_lightgbm,0.840606364948842,0.8325595238095238,0.7309462915601024,0.7781009172747733,"Optuna best params: {'max_depth': 6, 'learning_rate': 0.01972612166567123, 'n_estimators': 226, 'num_leaves': 32}"
+model_7_xgboost,0.8394764923733602,0.8349639818518412,0.7250639386189258,0.7758028388278388,"Optuna best params: {'max_depth': 8, 'learning_rate': 0.011594608712113624, 'n_estimators': 315, 'subsample': 0.602004496043557}"
+model_8_lightgbm_feature_engineering,0.840606364948842,0.8276211803725042,0.739855072463768,0.7805831039158269,"Added Title/FamilySize/IsAlone/Deck, removed HasCabin; Optuna best params: {'max_depth': 5, 'learning_rate': 0.03462992828885362, 'n_estimators': 367, 'num_leaves': 39}"
+model_9_catboost_fe,0.8394953235829515,0.8260681759042414,0.7367860187553281,0.7787845804485473,"CatBoost on Feature Engineering set; Optuna best params: {'depth': 4, 'learning_rate': 0.1270936514903325, 'iterations': 344, 'l2_leaf_reg': 6.503429608202858}"
+model_10_xgboost_fe,0.8372355784319879,0.8277229446717319,0.728005115089514,0.7743975878543723,"XGBoost on Feature Engineering set; Optuna best params: {'max_depth': 5, 'learning_rate': 0.0148335705077821, 'n_estimators': 392, 'subsample': 0.8595134872563878}"
+model_11_dnn_pytorch,0.8316050467641706,0.8328761005076795,0.7016197783461211,0.7608795076631752,"MLP 32 hidden + BatchNorm, Adam lr=0.01, 100 epochs, manual K-Fold"
+model_12_dnn_skorch_cosine,0.8271232188814261,0.8145688326868923,0.7134271099744246,0.7601128217181807,"TitanicNet + BatchNorm - skorch, Pipeline+cross_validate, CosineAnnealingLR scheduler"
+model_13_voting_soft,0.8417174063147324,0.8229105090311988,0.74846547314578,0.7834935008893763,"VotingClassifier (soft): LightGBM+CatBoost+XGBoost+RandomForest, all on FE features"
